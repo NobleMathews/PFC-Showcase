@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "(cd client-gallery && npm install);",
     "start": "node ./bin/www",
     "build": "cd client-gallery && yarn build && cd .. && cp -R client-gallery/build/ public/ && mv public/index.html public/app.html",
     "dev": "concurrently --prefix-colors 'blue,yellow' \"cross-env NODE_ENV=development PORT=3001 nodemon\" \"cd client-gallery && cross-env PORT=3000 npm start\""

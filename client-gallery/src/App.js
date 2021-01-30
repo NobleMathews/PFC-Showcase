@@ -37,7 +37,7 @@ render() {
   return (
    <div className="App">
     {/* <Route path="/test" render={() => <Test images={this.state.images} />} /> */}
-    <Route exact path="/gallery/:type" component={Gallery} />
+    <Route exact path="/gallery/:id" component={Gallery} />
     <Route exact path="/" component={Home} />
    </div>
   );

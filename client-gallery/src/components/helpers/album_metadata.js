@@ -6,5 +6,14 @@ export const getAlbumID = (name) => {
 }
 
 export const getAlbumName = (id) => {
-    return _.findKey(obj, (item) => (item == id));
+    return _.findKey(config.albumIDs, (item) => (item === id));
+}
+
+export const getAlbumPreview = (id_name) => {
+    const val= config.albumPreviews[`${id_name}`];
+    return val?val:config.albumPreviews[`${getAlbumName(id_name)}`];
+}
+
+export const getImgSrc = (url, preview=false) => {
+    return `${url}${preview?config.previewWidth:config.maxWidth}`
 }

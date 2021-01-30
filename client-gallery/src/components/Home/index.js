@@ -3,6 +3,7 @@ import {config} from '../../config';
 import {getAlbumsArrObj} from '../helpers/await_all';
 import styled from 'styled-components';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
+import {getAlbumPreview} from '../helpers/album_metadata';
 var _ = require('lodash');
 
 const Home = () => {
@@ -28,18 +29,11 @@ const Home = () => {
             {/* <p className="lead">TagLine - Modify to a fixed dark image for it to look good </p> */}
             </div>
         </Jumbotron>
-        {images.map(({name,data}) => (
+        {Object.keys(config.albumIDs).map((name)=> (
             <>
-             <h1>{name}</h1>
-             <ResponsiveMasonry
-                columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
-            >
-                <Masonry>
-                {data.map(image=>(
-                <p>{image}</p>
-                ))}
-                </Masonry>
-            </ResponsiveMasonry>
+            {/* just for testing need to use a proper component */}
+            <a style={{display:"block"}} href={`/gallery/${config.albumIDs[name]}`}>{name}</a>
+            <img src={getAlbumPreview(name)} />
             </>
         ))}
         </>

@@ -3,6 +3,7 @@ import {config} from '../../config';
 import {getAlbumsArrObj} from '../helpers/await_all';
 import styled from 'styled-components';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
+import { getImgSrc } from '../helpers/album_metadata';
 var _ = require('lodash');
 
 const Gallery = () => {
@@ -28,6 +29,9 @@ const Gallery = () => {
             {/* <p className="lead">TagLine - Modify to a fixed dark image for it to look good </p> */}
             </div>
         </Jumbotron>
+        {
+            <img src={getImgSrc("https://lh3.googleusercontent.com/BXvyRjK2pw-skWDRQgEtxAsxbp2KKSTVDpvd3WRlqWO0dnBb31KIc87zGkcnGztRk8xYnMmVOQAk9LUgRaFif2o98tv4GgfBfLUfFYFV3RSXiLHJnqowP2s-oO-pnq-gfL73IjM6Qg",true)} alt={"Testing out variable width"} />
+        }
         {images.map(({name,data}) => (
             <>
              <h1>{name}</h1>
