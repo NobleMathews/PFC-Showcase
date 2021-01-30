@@ -1,22 +1,24 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {config} from '../../config';
 import {getAlbumsArrObj} from '../helpers/await_all';
 import styled from 'styled-components';
-import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 import {getAlbumPreview} from '../helpers/album_metadata';
-var _ = require('lodash');
+// import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
+// var _ = require('lodash');
 
 const Home = () => {
-    const [images, setImages] = useState([])
+    // add back useState to imports from rect
+    // const [images, setImages] = useState([])
 
     // Querying everything parallely to cache on homepage
     useEffect(() => {
         (async function(){
             const values = config.albumIDs;
-            const res = getAlbumsArrObj(values);
-            const result = await res;
-            const images = _(result).filter(album => album.status === "fulfilled").map('value').value();
-            setImages(images);  
+            // const res = 
+            getAlbumsArrObj(values);
+            // const result = await res;
+            // const images = _(result).filter(album => album.status === "fulfilled").map('value').value();
+            // setImages(images);  
         })();
     }, [])
 
@@ -33,7 +35,7 @@ const Home = () => {
             <>
             {/* just for testing need to use a proper component */}
             <a style={{display:"block"}} href={`/gallery/${config.albumIDs[name]}`}>{name}</a>
-            <img src={getAlbumPreview(name)} />
+            <img src={getAlbumPreview(name)} alt={"Placeholder preview"} />
             </>
         ))}
         </>
