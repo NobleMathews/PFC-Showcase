@@ -17,3 +17,8 @@ export const getAlbumPreview = (id_name) => {
 export const getImgSrc = (url, preview=false) => {
     return `${url}${preview?config.previewWidth:config.maxWidth}`
 }
+
+export const orig_thumb_List = (list) => {
+    const result = list.map((item)=>({"original":`${item}${config.maxWidth}`, "thumbnail":`${item}${config.previewWidth}`, "fullscreen":`${item}`}))
+    return result;
+} 
