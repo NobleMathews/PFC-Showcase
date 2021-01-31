@@ -5,23 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-.sticky {
-  position: sticky;
-  top: 0;
-  margin: 0;
-  padding: 50px;
-  height: 240px;
-}
-
-.cont {
-  background-color: gray;
-  padding-top: 20px;
-  margin: 0;
 }
