@@ -40,7 +40,7 @@ const Gallery = () => {
                         <Masonry>
                         <img alt="Testing masonry packing" style={{width: "100%", display: "block"}} src={"https://picsum.photos/200/300"} />
                         {data.map((image,i)=>(
-                            <img key={i} alt={`${pagename}#${i}`} style={{width: "100%", display: "block"}} src={getImgSrc(image,true)} />
+                            <img key={i} loading="lazy" alt={`${pagename}#${i}`} style={{width: "100%", display: "block"}} src={getImgSrc(image,true)} />
                         ))}
                         </Masonry>
                     </ResponsiveMasonry>
