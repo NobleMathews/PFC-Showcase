@@ -1,94 +1,88 @@
 import React, {useState, useEffect} from 'react'
-import {config} from '../../config';
 import {getAlbumsArrObj} from '../helpers/await_all';
 import styled from 'styled-components';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
-import { getAlbumID, getAlbumName, getImgSrc } from '../helpers/album_metadata';
-import { values } from 'lodash';
+import { getAlbumName, getImgSrc, getImgHeight } from '../helpers/album_metadata';
 import { useParams } from 'react-router-dom';
-import { ParallaxProvider, Parallax, ParallaxBanner } from 'react-scroll-parallax';
+import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
+import Skeleton from 'react-loading-skeleton';
 var _ = require('lodash');
 
 const Gallery = () => {
+    const [loading, setLoading] = useState([]);
     const [images, setImages] = useState([])
-    const [randlink, setRandLink] = useState("");
-    const [randnum, setRandNum] = useState(0);
-    // var randlink;
+    const [heights, setHeight] = useState([])
 
     const {id} = useParams();
     const pagename = getAlbumName(id);
-
-    function updateLink (randnum) {
-        // setRandLink(images[0].data[randnum]);
-        // console.log(randnum);
+    const imageLoaded = (i) => {
+        let newArr = [...loading];
+        newArr[i] = true;
+        setLoading(newArr)
     }
-
-    // Querying everything parallely to cache on homepage
     useEffect(() => {
         (async function(){
-            // const values = config.albumIDs;
             const values = [id];
             const res = getAlbumsArrObj(values);
             const result = await res;
             const images = _(result).filter(album => album.status === "fulfilled").map('value').value();
-            setImages(images);
-            setRandNum(Math.floor(Math.random()*images[0].data.length));
-            updateLink(randnum);
-            setRandLink(images[0].data[randnum]);
-            console.log(randnum);
-            // console.log(images);
+            const heightsA = await getImgHeight(images[0].data);
+            const nameArray = heightsA.map(function (el) { return el.value; });
+            setHeight(nameArray);
+            setImages(images);  
         })();
-        // (async function(){
-        //     console.log(randnum);
-        //     setRandLink(images[0].data[randnum]);
-        // })();
-        
-    }, [])
+    }, [id])
 
     return (
-        <>
-        {/* Just a placholder will need to come up with a good overall theme / style language */}
+        <GalleryMain>
         <ParallaxProvider>
-            
             <Jumbotron className="sticky">
                 <div className="container">
                 <h1 className="display-2"><b>{pagename}</b></h1>
                 <p>{randnum} {randlink}</p>
                 </div>
             </Jumbotron>
-            
             <Parallax y={[0,0]}>
-            <div className="cont">
-            {
-                <img src={getImgSrc("https://lh3.googleusercontent.com/BXvyRjK2pw-skWDRQgEtxAsxbp2KKSTVDpvd3WRlqWO0dnBb31KIc87zGkcnGztRk8xYnMmVOQAk9LUgRaFif2o98tv4GgfBfLUfFYFV3RSXiLHJnqowP2s-oO-pnq-gfL73IjM6Qg",true)} alt={"Testing out variable width"} />
-            }
-            {images.map(({name,data}) => (
-                
-                <>
-                <h1>{pagename}</h1>
+                <GalleryContainer>
                 <ResponsiveMasonry
-                    columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
+                        key={heights.length}
+                        columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
                 >
-                    <Masonry>
-                    {data.map(image=>(
-                        <>
-                        <p>{image}</p>
-                        </>
-                    ))}
-                    </Masonry>
-                </ResponsiveMasonry>
-                
-                </>
-            ))}
-            </div>
+                {images.map(({data}) => (
 
-        {/* </ParallaxBanner> */}
-        </Parallax>
+                        <Masonry gutter={"15px"}>
+                        {/* <img alt="Testing masonry packing" style={{width: "100%", display: "block"}} src={"https://picsum.photos/200/300"} /> */}
+                        {data.map((image,i)=>(
+                            <>
+                            <Skeleton key={"skeleton"+i} style={{display: loading[i] ? "none" : "block", paddingBottom: `${heights[i]*1.2}px`,width: "100%"}}/>
+                            <img key={i} alt={`${pagename}#${i}`} style={{width: "100%", display: loading[i] ? "block" : "none"}} src={getImgSrc(image,true)} onLoad={()=>imageLoaded(i)}/>
+                            </>
+                        ))}
+                        </Masonry>
+                ))}
+                </ResponsiveMasonry>
+                </GalleryContainer>
+            </Parallax>
         </ParallaxProvider>
-        </>
+        </GalleryMain>
     )
 }
 
+const GalleryMain = styled.div`
+    .sticky {
+        position: sticky;
+        top: 0;
+        margin: 0;
+        padding: 50px;
+        height: 240px;
+    }
+`
+
+const GalleryContainer = styled.div`
+    background-color: var(--color-primary);
+    padding: 20px;
+    margin: 0;
+`
 const Jumbotron = styled.div`
     background: 
     linear-gradient(
