@@ -3,20 +3,31 @@ import {config} from '../../config';
 import {getAlbumsArrObj} from '../helpers/await_all';
 import styled from 'styled-components';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
-import { getImgSrc } from '../helpers/album_metadata';
+import { getAlbumName , getImgSrc  , orig_thumb_List} from '../helpers/album_metadata';
+import {useParams} from 'react-router-dom'
+import { SRLWrapper } from "simple-react-lightbox";
 var _ = require('lodash');
 
 const Gallery = () => {
+    const {id} = useParams()
+    const albumName = getAlbumName(id)
+    const albumIDs = {}
+    albumIDs[albumName] = id
+
     const [images, setImages] = useState([])
 
     // Querying everything parallely to cache on homepage
     useEffect(() => {
         (async function(){
-            const values = config.albumIDs;
+            const values = albumIDs;
             const res = getAlbumsArrObj(values);
             const result = await res;
-            const images = _(result).filter(album => album.status === "fulfilled").map('value').value();
-            setImages(images);  
+            const albums = _(result).filter(album => album.status === "fulfilled").map('value').value();
+            const temp = [];
+            albums.forEach(({name , data}) => {
+                temp.push({name , data : orig_thumb_List(data)})
+            })
+            setImages(temp)
         })();
     }, [])
 
@@ -32,20 +43,29 @@ const Gallery = () => {
         {
             <img src={getImgSrc("https://lh3.googleusercontent.com/BXvyRjK2pw-skWDRQgEtxAsxbp2KKSTVDpvd3WRlqWO0dnBb31KIc87zGkcnGztRk8xYnMmVOQAk9LUgRaFif2o98tv4GgfBfLUfFYFV3RSXiLHJnqowP2s-oO-pnq-gfL73IjM6Qg",true)} alt={"Testing out variable width"} />
         }
-        {images.map(({name,data}) => (
+      {images.map(({ name, data }) => (
             <>
              <h1>{name}</h1>
-             <ResponsiveMasonry
-                columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
-            >
-                <Masonry>
-                {data.map(image=>(
-                <p>{image}</p>
-                ))}
-                </Masonry>
-            </ResponsiveMasonry>
-            </>
-        ))}
+               <SRLWrapper>
+                    <ResponsiveMasonry
+                        columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
+                    >
+                        <Masonry>
+                        { data.map((img , i)=>(
+                            <a href={img["fullscreen"]}>
+                                <img
+                                key={i}
+                                alt={i}
+                                style={{ width: "100%", display: "block" }}
+                                src={img["thumbnail"]}
+                                />
+                            </a>
+                        ))}
+                        </Masonry>
+                    </ResponsiveMasonry>
+            </SRLWrapper>
+           </>
+      ))}
         </>
     )
 }

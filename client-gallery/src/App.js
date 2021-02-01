@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import Home from "./components/Home";
 import Gallery from "./components/Gallery";
+import Modal from "./components/Modal";
 
 // import {config} from './config';
 // import {getAlbumsArrObj} from './components/helpers/await_all';
@@ -14,34 +15,34 @@ import Gallery from "./components/Gallery";
 // }
 
 class App extends Component {
-//  constructor(props) {
-//   super(props);
-// this.state = {
-//    images: []
-//   };
-//  }
+  //  constructor(props) {
+  //   super(props);
+  // this.state = {
+  //    images: []
+  //   };
+  //  }
 
-// async componentDidMount() {
-//   // const values = config.albumIDs.map(album => Object.values(album));
-//   // const res = getAlbums(values);
-//   const values = config.albumIDs;
-//   const res = getAlbumsArrObj(values);
-//   const result = await res;
-//   const images = _(result).filter(album => album.status === "fulfilled").map('value').value();
-//   this.setState({
-//    images
-//   });
-// }
+  // async componentDidMount() {
+  //   // const values = config.albumIDs.map(album => Object.values(album));
+  //   // const res = getAlbums(values);
+  //   const values = config.albumIDs;
+  //   const res = getAlbumsArrObj(values);
+  //   const result = await res;
+  //   const images = _(result).filter(album => album.status === "fulfilled").map('value').value();
+  //   this.setState({
+  //    images
+  //   });
+  // }
 
-render() {
-  return (
-   <div className="App">
-    {/* <Route path="/test" render={() => <Test images={this.state.images} />} /> */}
-    <Route exact path="/gallery/:id" component={Gallery} />
-    <Route exact path="/" component={Home} />
-   </div>
-  );
- }
+  render() {
+    return (
+      <div className="App">
+        {/* <Route path="/test" render={() => <Test images={this.state.images} />} /> */}
+        <Route exact path="/gallery/:id" component={Gallery} />
+        <Route exact path="/" component={Home} />
+      </div>
+    );
+  }
 }
 
 export default App;
