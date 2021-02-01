@@ -11,9 +11,17 @@ var _ = require('lodash');
 
 const Gallery = () => {
     const [images, setImages] = useState([])
+    const [randlink, setRandLink] = useState("");
+    const [randnum, setRandNum] = useState(0);
+    // var randlink;
 
     const {id} = useParams();
     const pagename = getAlbumName(id);
+
+    function updateLink (randnum) {
+        // setRandLink(images[0].data[randnum]);
+        // console.log(randnum);
+    }
 
     // Querying everything parallely to cache on homepage
     useEffect(() => {
@@ -23,8 +31,18 @@ const Gallery = () => {
             const res = getAlbumsArrObj(values);
             const result = await res;
             const images = _(result).filter(album => album.status === "fulfilled").map('value').value();
-            setImages(images);  
+            setImages(images);
+            setRandNum(Math.floor(Math.random()*images[0].data.length));
+            updateLink(randnum);
+            setRandLink(images[0].data[randnum]);
+            console.log(randnum);
+            // console.log(images);
         })();
+        // (async function(){
+        //     console.log(randnum);
+        //     setRandLink(images[0].data[randnum]);
+        // })();
+        
     }, [])
 
     return (
@@ -32,10 +50,10 @@ const Gallery = () => {
         {/* Just a placholder will need to come up with a good overall theme / style language */}
         <ParallaxProvider>
             
-            
             <Jumbotron className="sticky">
                 <div className="container">
                 <h1 className="display-2"><b>{pagename}</b></h1>
+                <p>{randnum} {randlink}</p>
                 </div>
             </Jumbotron>
             
@@ -45,6 +63,7 @@ const Gallery = () => {
                 <img src={getImgSrc("https://lh3.googleusercontent.com/BXvyRjK2pw-skWDRQgEtxAsxbp2KKSTVDpvd3WRlqWO0dnBb31KIc87zGkcnGztRk8xYnMmVOQAk9LUgRaFif2o98tv4GgfBfLUfFYFV3RSXiLHJnqowP2s-oO-pnq-gfL73IjM6Qg",true)} alt={"Testing out variable width"} />
             }
             {images.map(({name,data}) => (
+                
                 <>
                 <h1>{pagename}</h1>
                 <ResponsiveMasonry
@@ -52,7 +71,9 @@ const Gallery = () => {
                 >
                     <Masonry>
                     {data.map(image=>(
-                    <p>{image}</p>
+                        <>
+                        <p>{image}</p>
+                        </>
                     ))}
                     </Masonry>
                 </ResponsiveMasonry>
