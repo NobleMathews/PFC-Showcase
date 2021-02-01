@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import Home from "./components/Home";
 import Gallery from "./components/Gallery";
@@ -16,24 +16,24 @@ import { createGlobalStyle } from 'styled-components';
 // }
 
 class App extends Component {
-//  constructor(props) {
-//   super(props);
-// this.state = {
-//    images: []
-//   };
-//  }
+  //  constructor(props) {
+  //   super(props);
+  // this.state = {
+  //    images: []
+  //   };
+  //  }
 
-// async componentDidMount() {
-//   // const values = config.albumIDs.map(album => Object.values(album));
-//   // const res = getAlbums(values);
-//   const values = config.albumIDs;
-//   const res = getAlbumsArrObj(values);
-//   const result = await res;
-//   const images = _(result).filter(album => album.status === "fulfilled").map('value').value();
-//   this.setState({
-//    images
-//   });
-// }
+  // async componentDidMount() {
+  //   // const values = config.albumIDs.map(album => Object.values(album));
+  //   // const res = getAlbums(values);
+  //   const values = config.albumIDs;
+  //   const res = getAlbumsArrObj(values);
+  //   const result = await res;
+  //   const images = _(result).filter(album => album.status === "fulfilled").map('value').value();
+  //   this.setState({
+  //    images
+  //   });
+  // }
 
 render() {
   return (
