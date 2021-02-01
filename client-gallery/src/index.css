@@ -1,10 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  /* font-family: 'Permanent Marker', cursive; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+html,body{
+  background: var(--color-primary);
 }
 
 code {

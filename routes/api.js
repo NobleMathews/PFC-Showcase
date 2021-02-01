@@ -10,7 +10,6 @@ const albumCache = persist.create({
 });
 albumCache.init();
 
-
 router.get('/:id', async function(request, response) {
   try {
     const cachedAlbums = await albumCache.getItem(`${request.params.id}`);

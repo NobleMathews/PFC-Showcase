@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import Home from "./components/Home";
 import Gallery from "./components/Gallery";
-import Modal from "./components/Modal";
+import FadeIn from 'react-fade-in';
+import { createGlobalStyle } from 'styled-components';
 
 // import {config} from './config';
 // import {getAlbumsArrObj} from './components/helpers/await_all';
@@ -34,15 +35,25 @@ class App extends Component {
   //   });
   // }
 
-  render() {
-    return (
-      <div className="App">
-        {/* <Route path="/test" render={() => <Test images={this.state.images} />} /> */}
-        <Route exact path="/gallery/:id" component={Gallery} />
-        <Route exact path="/" component={Home} />
-      </div>
-    );
-  }
+render() {
+  return (
+   <div className="App" style={{"background":'var(--color-primary)'}}>
+    {/* <Route path="/test" render={() => <Test images={this.state.images} />} /> */}
+    <GlobalStyles />
+    <FadeIn>
+      <Route exact path="/gallery/:id" component={Gallery} />
+      <Route exact path="/" component={Home} />
+    </FadeIn>
+   </div>
+  );
+ }
 }
 
 export default App;
+
+const GlobalStyles = createGlobalStyle`
+  html {
+    --color-primary: #F2F2F2;
+    --color-accent: #F75743;
+  }
+`;
