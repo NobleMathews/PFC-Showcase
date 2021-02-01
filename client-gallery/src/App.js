@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route } from "react-router-dom";
 import Home from "./components/Home";
 import Gallery from "./components/Gallery";
+import FadeIn from 'react-fade-in';
 
 // import {config} from './config';
 // import {getAlbumsArrObj} from './components/helpers/await_all';
@@ -37,8 +38,10 @@ render() {
   return (
    <div className="App">
     {/* <Route path="/test" render={() => <Test images={this.state.images} />} /> */}
+    <FadeIn>
     <Route exact path="/gallery/:id" component={Gallery} />
     <Route exact path="/" component={Home} />
+    </FadeIn>
    </div>
   );
  }

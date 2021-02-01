@@ -33,18 +33,19 @@ const Gallery = () => {
             </Jumbotron>
             <Parallax y={[0,0]}>
                 <GalleryContainer>
-                {images.map(({data}) => (
-                    <ResponsiveMasonry
+                <ResponsiveMasonry
                         columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
-                    >
+                >
+                {images.map(({data}) => (
+
                         <Masonry>
                         <img alt="Testing masonry packing" style={{width: "100%", display: "block"}} src={"https://picsum.photos/200/300"} />
                         {data.map((image,i)=>(
                             <img key={i} loading="lazy" alt={`${pagename}#${i}`} style={{width: "100%", display: "block"}} src={getImgSrc(image,true)} />
                         ))}
                         </Masonry>
-                    </ResponsiveMasonry>
                 ))}
+                </ResponsiveMasonry>
                 </GalleryContainer>
             </Parallax>
         </ParallaxProvider>
