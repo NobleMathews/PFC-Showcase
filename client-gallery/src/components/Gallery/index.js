@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react'
+import React, {useState, useEffect} from 'react'
 import {getAlbumsArrObj} from '../helpers/await_all';
 import styled from 'styled-components';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
@@ -14,7 +14,7 @@ const Gallery = () => {
     const [loading, setLoading] = useState([]);
     const [images, setImages] = useState([])
     const [heights, setHeight] = useState([])
-    const [randlink, setRandLink] = useState("");
+    // const [randlink, setRandLink] = useState("");
 
     const {id} = useParams();
     const pagename = getAlbumName(id);
@@ -34,7 +34,7 @@ const Gallery = () => {
             const heightsA = await getImgHeight(images[0].data);
             const nameArray = heightsA.map(function (el) { return el.value; });
             setHeight(nameArray);
-            setRandLink(images[0].data[rand]);
+            // setRandLink(images[0].data[rand]);
             url=images[0].data[rand];
             setImages(images);
         })();
