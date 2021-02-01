@@ -2,23 +2,33 @@ import React, {useState, useEffect} from 'react'
 import {getAlbumsArrObj} from '../helpers/await_all';
 import styled from 'styled-components';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
-import { getAlbumName, getImgSrc } from '../helpers/album_metadata';
+import { getAlbumName, getImgSrc, getImgHeight } from '../helpers/album_metadata';
 import { useParams } from 'react-router-dom';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
+import Skeleton from 'react-loading-skeleton';
 var _ = require('lodash');
 
 const Gallery = () => {
-
+    const [loading, setLoading] = useState([]);
     const [images, setImages] = useState([])
+    const [heights, setHeight] = useState([])
+
     const {id} = useParams();
     const pagename = getAlbumName(id);
-
+    const imageLoaded = (i) => {
+        let newArr = [...loading];
+        newArr[i] = true;
+        setLoading(newArr)
+    }
     useEffect(() => {
         (async function(){
             const values = [id];
             const res = getAlbumsArrObj(values);
             const result = await res;
             const images = _(result).filter(album => album.status === "fulfilled").map('value').value();
+            const heightsA = await getImgHeight(images[0].data);
+            const nameArray = heightsA.map(function (el) { return el.value; });
+            setHeight(nameArray);
             setImages(images);  
         })();
     }, [id])
@@ -34,14 +44,18 @@ const Gallery = () => {
             <Parallax y={[0,0]}>
                 <GalleryContainer>
                 <ResponsiveMasonry
+                        key={heights.length}
                         columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
                 >
                 {images.map(({data}) => (
 
-                        <Masonry>
-                        <img alt="Testing masonry packing" style={{width: "100%", display: "block"}} src={"https://picsum.photos/200/300"} />
+                        <Masonry gutter={"15px"}>
+                        {/* <img alt="Testing masonry packing" style={{width: "100%", display: "block"}} src={"https://picsum.photos/200/300"} /> */}
                         {data.map((image,i)=>(
-                            <img key={i} loading="lazy" alt={`${pagename}#${i}`} style={{width: "100%", display: "block"}} src={getImgSrc(image,true)} />
+                            <>
+                            <Skeleton key={"skeleton"+i} style={{display: loading[i] ? "none" : "block", paddingBottom: `${heights[i]*1.2}px`,width: "100%"}}/>
+                            <img key={i} alt={`${pagename}#${i}`} style={{width: "100%", display: loading[i] ? "block" : "none"}} src={getImgSrc(image,true)} onLoad={()=>imageLoaded(i)}/>
+                            </>
                         ))}
                         </Masonry>
                 ))}
@@ -64,7 +78,7 @@ const GalleryMain = styled.div`
 `
 
 const GalleryContainer = styled.div`
-    background-color: #fff;
+    background-color: var(--color-primary);
     padding: 20px;
     margin: 0;
 `
