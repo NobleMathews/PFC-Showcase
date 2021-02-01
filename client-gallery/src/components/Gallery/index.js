@@ -2,12 +2,13 @@ import React, {useState, useEffect, Component} from 'react'
 import {getAlbumsArrObj} from '../helpers/await_all';
 import styled from 'styled-components';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
-import { getAlbumName, getImgSrc, getImgHeight } from '../helpers/album_metadata';
-import { useParams } from 'react-router-dom';
+import { getAlbumName , getImgSrc  , orig_thumb_List , getImgHeight } from '../helpers/album_metadata';
+import {useParams} from 'react-router-dom'
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
+import { SRLWrapper } from "simple-react-lightbox";
 import Skeleton from 'react-loading-skeleton';
-var _ = require('lodash');
 
+var _ = require('lodash');
 var url="";
 
 const Gallery = () => {
@@ -52,23 +53,27 @@ const Gallery = () => {
             </Jumbotron>
             <Parallax y={[0,0]}>
                 <GalleryContainer>
-                <ResponsiveMasonry
-                        key={heights.length}
-                        columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
-                >
-                {images.map(({data}) => (
+                    <SRLWrapper>
+                        <ResponsiveMasonry
+                                key={heights.length}
+                                columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
+                        >
+                        {images.map(({data}) => (
 
-                        <Masonry gutter={"15px"}>
-                        {/* <img alt="Testing masonry packing" style={{width: "100%", display: "block"}} src={"https://picsum.photos/200/300"} /> */}
-                        {data.map((image,i)=>(
-                            <>
-                            <Skeleton key={"skeleton"+i} style={{display: loading[i] ? "none" : "block", paddingBottom: `${heights[i]*1.2}px`,width: "100%"}}/>
-                            <img key={i} alt={`${pagename}#${i}`} style={{width: "100%", display: loading[i] ? "block" : "none"}} src={getImgSrc(image,true)} onLoad={()=>imageLoaded(i)}/>
-                            </>
+                                <Masonry gutter={"15px"}>
+                                {/* <img alt="Testing masonry packing" style={{width: "100%", display: "block"}} src={"https://picsum.photos/200/300"} /> */}
+                                {data.map((image,i)=>(
+                                    <>
+                                    <Skeleton key={"skeleton"+i} style={{display: loading[i] ? "none" : "block", paddingBottom: `${heights[i]*1.2}px`,width: "100%"}}/>
+                                    <a href={getImgSrc(image , false)}>
+                                        <img key={i} alt={`${pagename}#${i}`} style={{width: "100%", display: loading[i] ? "block" : "none"}} src={getImgSrc(image,true)} onLoad={()=>imageLoaded(i)}/>
+                                    </a>
+                                    </>
+                                ))}
+                                </Masonry>
                         ))}
-                        </Masonry>
-                ))}
-                </ResponsiveMasonry>
+                        </ResponsiveMasonry>
+                    </SRLWrapper>
                 </GalleryContainer>
             </Parallax>
         </ParallaxProvider>
