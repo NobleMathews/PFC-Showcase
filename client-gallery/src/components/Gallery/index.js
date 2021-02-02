@@ -45,8 +45,13 @@ const Gallery = () => {
         
         <GalleryMain>
         <ParallaxProvider>
-            <Jumbotron className="sticky" style={{backgroundImage: `url(${url})`}}>
-                <div className="container">
+            <Jumbotron className="sticky" style={{backgroundImage:
+            `linear-gradient(
+                rgba(0, 0, 0, 0.55), 
+                rgba(0, 0, 0, 0.55)
+                ),
+                url(${url})`}}>
+                <div className="container"> 
                 <h1 className="display-2"><b>{pagename}</b></h1>
                 {/* <p>{randlink}</p> */}
                 </div>
@@ -93,21 +98,22 @@ const GalleryMain = styled.div`
 `
 const GalleryContainer = styled.div`
     background-color: var(--color-primary);
+    // background-color: gray;
     padding: 20px;
     margin: 0;
 `
 const Jumbotron = styled.div`
-    color: white;
-    background:
-    linear-gradient(
-        rgba(0, 0, 250, 0.25), 
-        rgba(125, 250, 250, 0.45)
-        );
+    background-color: white;
+    opacity: 1;
     background-repeat: no-repeat;
     height: 100%;
     background-position: center;
     background-size: cover;
     overflow: hidden;
+    color: white;
+    font-weight: bold;
+    font-family: verdana;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 0px 0px 5px #232323, -1px 1px 6px #acacac;
     // url(https://lh3.googleusercontent.com/rUxRcUW34A3AUt6BCt7LrDXqR8xPQ1Dy1T5Qr3DAjbUUufMCiH6p_ThFiuK67xekyrK8aTsTDDCzW_tGP_hhnJaty5BpbrYm0LHvFONyVt-U4o3vW0zkLAFLYIPK4YWyMO0z5YFvcA);
 `
 
