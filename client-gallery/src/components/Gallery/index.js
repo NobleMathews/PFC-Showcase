@@ -7,6 +7,7 @@ import {useParams} from 'react-router-dom'
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import { SRLWrapper } from "simple-react-lightbox";
 import Skeleton from 'react-loading-skeleton';
+import { filter } from 'lodash';
 
 var _ = require('lodash');
 var url="";
@@ -45,18 +46,24 @@ const Gallery = () => {
         
         <GalleryMain>
         <ParallaxProvider>
+
+            <div className="container-shr"> 
+                <h1 className="display-2"><b>{pagename}</b></h1>
+            </div>
+
             <Jumbotron className="sticky" style={{backgroundImage:
             `linear-gradient(
-                rgba(0, 0, 0, 0.55), 
-                rgba(0, 0, 0, 0.55)
+                rgba(0, 0, 0, 0.45), 
+                rgba(0, 0, 0, 0.45)
                 ),
                 url(${url})`}}>
-                <div className="container"> 
-                <h1 className="display-2"><b>{pagename}</b></h1>
-                {/* <p>{randlink}</p> */}
-                </div>
+                   
             </Jumbotron>
+
+            
+            <div className="gallery-shr">
             <Parallax y={[0,0]}>
+                
                 <GalleryContainer>
                     <SRLWrapper>
                         <ResponsiveMasonry
@@ -79,8 +86,12 @@ const Gallery = () => {
                         ))}
                         </ResponsiveMasonry>
                     </SRLWrapper>
+                    
                 </GalleryContainer>
+                
             </Parallax>
+            </div>
+            
         </ParallaxProvider>
         </GalleryMain>
     )
@@ -104,16 +115,14 @@ const GalleryContainer = styled.div`
 `
 const Jumbotron = styled.div`
     background-color: white;
-    opacity: 1;
+    filter: blur(3px);
+    z-index:0;
     background-repeat: no-repeat;
     height: 100%;
     background-position: center;
     background-size: cover;
     overflow: hidden;
-    color: white;
-    font-weight: bold;
-    font-family: verdana;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 0px 0px 5px #232323, -1px 1px 6px #acacac;
+    
     // url(https://lh3.googleusercontent.com/rUxRcUW34A3AUt6BCt7LrDXqR8xPQ1Dy1T5Qr3DAjbUUufMCiH6p_ThFiuK67xekyrK8aTsTDDCzW_tGP_hhnJaty5BpbrYm0LHvFONyVt-U4o3vW0zkLAFLYIPK4YWyMO0z5YFvcA);
 `
 
