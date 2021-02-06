@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "(cd client-gallery && npm install);",
+    "postinstall": "(cd client-gallery && yarn install);",
     "start": "node ./bin/www",
-    "build": "cd client-gallery && yarn build && cd .. && cp -R client-gallery/build/ public/ && mv public/index.html public/app.html",
+    "build": "run-script-os",
+    "build:windows": "cd client-gallery && yarn build && cd .. && xcopy /e/h/y/q \"./client-gallery/build\" \"./public\"",
+    "build:default": "cd client-gallery && yarn build && cd .. && cp -R client-gallery/build/ public/",
     "dev": "concurrently --prefix-colors 'blue,yellow' \"cross-env NODE_ENV=development PORT=3001 nodemon\" \"cd client-gallery && cross-env PORT=3000 npm start\""
   },
   "dependencies": {
@@ -25,9 +27,17 @@
     "nodemon": "^2.0.7",
     "promise.allsettled": "^1.0.4",
     "react-bootstrap": "^1.4.3",
+    "react-burger-menu": "^3.0.3",
+    "react-fade-in": "^2.0.1",
+    "react-loading-skeleton": "^2.1.1",
     "react-responsive-masonry": "^2.1.1",
     "react-router-dom": "^5.2.0",
     "react-scroll-parallax": "^2.3.5",
+    "run-script-os": "^1.1.5",
+    "simple-react-lightbox": "^3.5.5",
     "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1"
   }
 }
