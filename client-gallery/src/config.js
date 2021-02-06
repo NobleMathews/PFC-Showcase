@@ -12,6 +12,9 @@ config.albumPreviews={
   "Tirutsava Day 2":"https://picsum.photos/600/400",
 };
 
+// showcase album _> picsum
+// about us page  
+
 config.maxWidth = "=w1024"
 
 config.previewWidth = "=w600"
