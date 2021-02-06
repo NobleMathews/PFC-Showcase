@@ -14,4 +14,4 @@ config.albumPreviews={
 
 config.maxWidth = "=w1024"
 
-config.previewWidth = "=w300"
+config.previewWidth = "=w600"
