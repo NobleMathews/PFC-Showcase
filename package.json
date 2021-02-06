@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "(cd client-gallery && npm install);",
     "start": "node ./bin/www",
-    "build": "cd client-gallery && yarn build && cd .. && cp -R client-gallery/build/ public/ && mv public/index.html public/app.html",
+    "build": "cd client-gallery && yarn build && cd .. && xcopy /e/h/y/q \"./client-gallery/build\" \"./public\" && move public\\index.html public\\app.html",
     "dev": "concurrently --prefix-colors 'blue,yellow' \"cross-env NODE_ENV=development PORT=3001 nodemon\" \"cd client-gallery && cross-env PORT=3000 npm start\""
   },
   "dependencies": {
@@ -33,5 +33,8 @@
     "react-scroll-parallax": "^2.3.5",
     "simple-react-lightbox": "^3.5.5",
     "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1"
   }
 }
