@@ -6,11 +6,9 @@
     "postinstall": "(cd client-gallery && npm install);",
     "start": "node ./bin/www",
     "build": "cd client-gallery && yarn build && cd .. && xcopy /e/h/y/q \"./client-gallery/build\" \"./public\" && move public\\index.html public\\app.html",
-    "dev": "concurrently --prefix-colors 'blue,yellow' \"cross-env NODE_ENV=development PORT=3001 nodemon\" \"cd client-gallery && cross-env PORT=3000 npm start\"",
-    "init-claudia": "claudia generate-serverless-express-proxy --express-module app"
+    "dev": "concurrently --prefix-colors 'blue,yellow' \"cross-env NODE_ENV=development PORT=3001 nodemon\" \"cd client-gallery && cross-env PORT=3000 npm start\""
   },
   "dependencies": {
-    "aws-serverless-express": "^3.4.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "concurrently": "^5.3.0",
@@ -37,7 +35,6 @@
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
-    "claudia": "^5.12.0",
     "copyfiles": "^2.4.1"
   }
 }
