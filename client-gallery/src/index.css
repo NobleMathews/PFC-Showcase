@@ -69,8 +69,8 @@ code {
 .red {
   background-color: red;
   position: absolute;
-  top: 35px;
-  left: 40px;
+  top: 30px;
+  left: 60px;
   -webkit-animation: up-right 1s infinite;
   -moz-animation: up-right 1s infinite;
   -o-animation: up-right 1s infinite;
