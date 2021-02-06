@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Gallery from "./components/Gallery";
 import FadeIn from 'react-fade-in';
 import { createGlobalStyle } from 'styled-components';
+import { stack as Menu } from 'react-burger-menu'
 
 // import {config} from './config';
 // import {getAlbumsArrObj} from './components/helpers/await_all';
@@ -37,13 +38,20 @@ class App extends Component {
 
 render() {
   return (
-   <div className="App" style={{"background":'var(--color-primary)'}}>
+   <div id="outer-container" className="App" style={{"background":'var(--color-primary)', height: "100%"}}>
     {/* <Route path="/test" render={() => <Test images={this.state.images} />} /> */}
     <GlobalStyles />
+    <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
+        <a href="/" className="menu-item" tabIndex="0">
+        <i className="lni lni-home"></i><span>Home</span>
+        </a>
+    </Menu>
+    <div id="page-wrap" style={{height: "100%"}}>
     <FadeIn>
       <Route exact path="/gallery/:id" component={Gallery} />
       <Route exact path="/" component={Home} />
     </FadeIn>
+    </div>
    </div>
   );
  }
