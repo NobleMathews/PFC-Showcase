@@ -7,17 +7,19 @@ import {useParams} from 'react-router-dom'
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import { SRLWrapper } from "simple-react-lightbox";
 import Skeleton from 'react-loading-skeleton';
-import { filter } from 'lodash';
+// import { filter } from 'lodash';
+// import { Jumbotron } from 'react-bootstrap';
+import HeroBanner from '../Banner';
 
 var _ = require('lodash');
-var url="";
+var url=[];
+var numberOfImages=0;
 
 const Gallery = () => {
     const [loading, setLoading] = useState([]);
     const [images, setImages] = useState([])
     const [heights, setHeight] = useState([])
-    // const [randlink, setRandLink] = useState("");
-
+    // url=[];
     const {id} = useParams();
     const pagename = getAlbumName(id);
     const imageLoaded = (i) => {
@@ -32,12 +34,24 @@ const Gallery = () => {
             const res = getAlbumsArrObj(values);
             const result = await res;
             const images = _(result).filter(album => album.status === "fulfilled").map('value').value();
-            const rand=Math.floor(Math.random()*images[0].data.length);
+            var rand;
+            if(images[0].data.length>=5){
+                numberOfImages=5;
+                for(var i=0;i<numberOfImages;i++){
+                    rand=Math.floor(Math.random()*images[0].data.length);
+                    url.push(images[0].data[rand]);
+                }
+            }
+            else{
+                numberOfImages=images[0].data.length;
+                for(var i=0;i<numberOfImages;i++){
+                    url.push(images[0].data[i]);
+                }
+            }
             const heightsA = await getImgHeight(images[0].data);
             const nameArray = heightsA.map(function (el) { return el.value; });
             setHeight(nameArray);
-            // setRandLink(images[0].data[rand]);
-            url=images[0].data[rand];
+            // url=images[0].data[rand];
             setImages(images);
         })();
     }, [id])
@@ -47,7 +61,7 @@ const Gallery = () => {
         <GalleryMain>
         <ParallaxProvider>
 
-            <div className="container-shr"> 
+            {/* <div className="container-shr"> 
                 <h1 className="display-2"><b>{pagename}</b></h1>
             </div>
 
@@ -58,9 +72,10 @@ const Gallery = () => {
                 ),
                 url(${url})`}}>
                    
-            </Jumbotron>
+            </Jumbotron> */}
 
-            
+            <HeroBanner links={url} pagename={pagename} />
+
             <div className="gallery-shr">
             <Parallax y={[0,0]}>
                 
@@ -113,17 +128,17 @@ const GalleryContainer = styled.div`
     padding: 20px;
     margin: 0;
 `
-const Jumbotron = styled.div`
-    background-color: white;
-    filter: blur(3px);
-    z-index:0;
-    background-repeat: no-repeat;
-    height: 100%;
-    background-position: center;
-    background-size: cover;
-    overflow: hidden;
+// const Jumbotron = styled.div`
+//     background-color: white;
+//     filter: blur(3px);
+//     z-index:0;
+//     background-repeat: no-repeat;
+//     height: 100%;
+//     background-position: center;
+//     background-size: cover;
+//     overflow: hidden;
     
-    // url(https://lh3.googleusercontent.com/rUxRcUW34A3AUt6BCt7LrDXqR8xPQ1Dy1T5Qr3DAjbUUufMCiH6p_ThFiuK67xekyrK8aTsTDDCzW_tGP_hhnJaty5BpbrYm0LHvFONyVt-U4o3vW0zkLAFLYIPK4YWyMO0z5YFvcA);
-`
+//     // url(https://lh3.googleusercontent.com/rUxRcUW34A3AUt6BCt7LrDXqR8xPQ1Dy1T5Qr3DAjbUUufMCiH6p_ThFiuK67xekyrK8aTsTDDCzW_tGP_hhnJaty5BpbrYm0LHvFONyVt-U4o3vW0zkLAFLYIPK4YWyMO0z5YFvcA);
+// `
 
 export default Gallery;
