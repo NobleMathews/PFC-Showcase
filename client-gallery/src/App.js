@@ -61,7 +61,8 @@ export default App;
 
 const GlobalStyles = createGlobalStyle`
   html {
-    --color-primary: #F2F2F2;
-    --color-accent: #F75743;
+    --color-primary: 	#181818;
+    /* --color-accent: #F75743; */
+    --color-accent: #383838;
   }
 `;

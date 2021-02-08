@@ -71,7 +71,7 @@ const Gallery = () => {
                                     <>
                                     <Skeleton key={"skeleton"+i} style={{display: loading[i] ? "none" : "block", paddingBottom: `${heights[i]*1.2}px`,width: "100%"}}/>
                                     <a href={getImgSrc(image , false)}>
-                                        <img key={i} alt={`${pagename}#${i}`} style={{width: "100%", display: loading[i] ? "block" : "none"}} src={getImgSrc(image,true)} onLoad={()=>imageLoaded(i)}/>
+                                        <img className="image" key={i} alt={`${pagename}#${i}`} style={{width: "100%", display: loading[i] ? "block" : "none"}} src={getImgSrc(image,true)} onLoad={()=>imageLoaded(i)}/>
                                     </a>
                                     </>
                                 ))}
@@ -101,7 +101,14 @@ const GalleryContainer = styled.div`
     // background-color: gray;
     padding: 20px;
     margin: 0;
+
+    .image:hover{
+        transform: scale(1.02);
+        transition: all 0.5s ease;
+        background-color: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+    }
 `
+
 const Jumbotron = styled.div`
     background-color: white;
     opacity: 1;

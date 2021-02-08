@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "(cd client-gallery && yarn install);",
+    "postinstall": "(cd client-gallery && npm install);",
     "start": "node ./bin/www",
     "build": "run-script-os",
     "build:windows": "cd client-gallery && yarn build && cd .. && xcopy /e/h/y/q \"./client-gallery/build\" \"./public\"",
