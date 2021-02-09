@@ -1,11 +1,11 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 const HeroBanner = (props) => {
 
     const linksList=props.links;
-    const numberOfImages=linksList.length;
+    // const numberOfImages=linksList.length;
     const url=linksList[0];
     const pagename=props.pagename;
 

@@ -239,7 +239,7 @@ const ContainerCustom = styled.div`
         0 22.3px 17.9px rgba(0, 0, 0, 0.072),
         0 41.8px 33.4px rgba(0, 0, 0, 0.086),
         0 100px 80px rgba(0, 0, 0, 0.12);
-        
+        transition: all 0.5s ease;
         background-color: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));;
         color: black;
         text-align: center;
