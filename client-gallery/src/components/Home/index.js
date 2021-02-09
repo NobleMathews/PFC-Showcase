@@ -28,7 +28,8 @@ const Home = () => {
     return(
         <div>
         
-        <header id="header" className="header" style={{backgroundColor:"#5f4def", padding:"15px 15px 0px 15px"}}>
+        <header id="header" className="header" style={{backgroundColor:"	#181818", padding:"15px 15px 0px 15px"}}>
+        <p className="hint" style={{fontSize: "3.5vw", fontFamily: "Roboto, sans-serif", textAlign: 'left', color: "#F5F5F5"}}>PHOTOGRAPHY & FILMS CLUB, IIT TIRUPATI</p>
         <Jumbotron id="home" className="jumbotron" style={{position:'relative'}}>
         {/* <div id="infoi"> */}
         <img className="img-fluid" style={{width:"100%", maxHeight:"calc(100vh - 30px)"}} src={camera} alt="alternative" />
@@ -41,13 +42,13 @@ const Home = () => {
             <div className="container">
               {/* <div className="row">
                 <div className="col-lg-6 col-xl-5"> */}
-                <div style={{width:"100%", display: "flex", alignItems: "center"}}>
+                {/* <div style={{width:"100%", display: "flex", alignItems: "center"}}>
                   <div className="text-container" style={{width:"100%", padding:"10px 20px"}}>
-                  <p className="hint">Welcome to</p>
-                  <p className="logo" style={{textAlign:"center"}}>PFC</p>
-                    <p className="hint">Photography & Films Club, IIT Tirupati</p>
+                  <p className="hint" style={{fontSize: "4vw"}}>Welcome to</p>
+                  <p className="logo" style={{textAlign:"center", color: "black",fontSize: "20vw"}}>PFC</p>
+                  <p className="hint" style={{fontSize: "4vw" }}>Photography & Films Club, IIT Tirupati</p>
                   </div> 
-                </div>
+                </div> */}
                 {/* </div>  */}
                 {/* <div className="col-lg-6 col-xl-7">
                   <div className="image-container">
@@ -61,8 +62,10 @@ const Home = () => {
           </div> 
                   </div>
           </Jumbotron> 
+
         </header> 
-        <svg className="header-frame" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 310"><defs><style dangerouslySetInnerHTML={{__html: ".cls-1{fill:#5f4def;}" }} /></defs><title>header-frame</title><path className="cls-1" d="M0,283.054c22.75,12.98,53.1,15.2,70.635,14.808,92.115-2.077,238.3-79.9,354.895-79.938,59.97-.019,106.17,18.059,141.58,34,47.778,21.511,47.778,21.511,90,38.938,28.418,11.731,85.344,26.169,152.992,17.971,68.127-8.255,115.933-34.963,166.492-67.393,37.467-24.032,148.6-112.008,171.753-127.963,27.951-19.26,87.771-81.155,180.71-89.341,72.016-6.343,105.479,12.388,157.434,35.467,69.73,30.976,168.93,92.28,256.514,89.405,100.992-3.315,140.276-41.7,177-64.9V0.24H0V283.054Z" /></svg>
+        <div style={{margin:"40px"}}>  </div>
+        {/* <svg className="header-frame" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 310"><defs><style dangerouslySetInnerHTML={{__html: ".cls-1{fill:#5f4def;}" }} /></defs><title>header-frame</title><path className="cls-1" d="M0,283.054c22.75,12.98,53.1,15.2,70.635,14.808,92.115-2.077,238.3-79.9,354.895-79.938,59.97-.019,106.17,18.059,141.58,34,47.778,21.511,47.778,21.511,90,38.938,28.418,11.731,85.344,26.169,152.992,17.971,68.127-8.255,115.933-34.963,166.492-67.393,37.467-24.032,148.6-112.008,171.753-127.963,27.951-19.26,87.771-81.155,180.71-89.341,72.016-6.343,105.479,12.388,157.434,35.467,69.73,30.976,168.93,92.28,256.514,89.405,100.992-3.315,140.276-41.7,177-64.9V0.24H0V283.054Z" /></svg> */}
 
          <ContainerCustom>
          <Container fluid={true} >     
@@ -192,6 +195,7 @@ const ContainerCustom = styled.div`
 
     .card-body{
         padding:0px 5px 0px 5px;
+        background-color: transparent;
     }
     .card-deck{
         padding: 15px;
@@ -202,8 +206,16 @@ const ContainerCustom = styled.div`
     .card{
         margin: auto 16px auto 16px;
         padding:0px 0px 0px 0px;
-        background-color: white;
+        background-color: 	#F5F5F5;
         border-radius:0px;
+        color: black;
+    }
+    .card:hover{
+        transition: all 0.5s ease;
+        background-color: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+        color: black;
+        transform: scale(1.02);
+        background-color: white;
     }
     .card-img-top{
         // padding:20px 0px 15px 0px;
@@ -233,7 +245,7 @@ const ContainerCustom = styled.div`
         text-align: center;
         margin:0px 0px 0px 0px;
         text-decoration: none;
-        transform: scale(1.02);
+        transform: scale(1.01);
     }
     .title{
         font-family: 'Permanent Marker', cursive;

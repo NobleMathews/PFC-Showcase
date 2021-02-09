@@ -93,7 +93,7 @@ const Gallery = () => {
                                     <>
                                     <Skeleton key={"skeleton"+i} style={{display: loading[i] ? "none" : "block", paddingBottom: `${heights[i]*1.2}px`,width: "100%"}}/>
                                     <a href={getImgSrc(image , false)}>
-                                        <img key={i} alt={`${pagename}#${i}`} style={{width: "100%", display: loading[i] ? "block" : "none"}} src={getImgSrc(image,true)} onLoad={()=>imageLoaded(i)}/>
+                                        <img className="image" key={i} alt={`${pagename}#${i}`} style={{width: "100%", display: loading[i] ? "block" : "none"}} src={getImgSrc(image,true)} onLoad={()=>imageLoaded(i)}/>
                                     </a>
                                     </>
                                 ))}
@@ -127,18 +127,27 @@ const GalleryContainer = styled.div`
     // background-color: gray;
     padding: 20px;
     margin: 0;
+
+    .image:hover{
+        transform: scale(1.02);
+        transition: all 0.5s ease;
+        background-color: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+    }
 `
-// const Jumbotron = styled.div`
-//     background-color: white;
-//     filter: blur(3px);
-//     z-index:0;
-//     background-repeat: no-repeat;
-//     height: 100%;
-//     background-position: center;
-//     background-size: cover;
-//     overflow: hidden;
-    
-//     // url(https://lh3.googleusercontent.com/rUxRcUW34A3AUt6BCt7LrDXqR8xPQ1Dy1T5Qr3DAjbUUufMCiH6p_ThFiuK67xekyrK8aTsTDDCzW_tGP_hhnJaty5BpbrYm0LHvFONyVt-U4o3vW0zkLAFLYIPK4YWyMO0z5YFvcA);
-// `
+
+const Jumbotron = styled.div`
+    background-color: white;
+    opacity: 1;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+    color: white;
+    font-weight: bold;
+    font-family: verdana;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 0px 0px 5px #232323, -1px 1px 6px #acacac;
+    // url(https://lh3.googleusercontent.com/rUxRcUW34A3AUt6BCt7LrDXqR8xPQ1Dy1T5Qr3DAjbUUufMCiH6p_ThFiuK67xekyrK8aTsTDDCzW_tGP_hhnJaty5BpbrYm0LHvFONyVt-U4o3vW0zkLAFLYIPK4YWyMO0z5YFvcA);
+`
 
 export default Gallery;
