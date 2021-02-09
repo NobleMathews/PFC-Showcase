@@ -157,4 +157,44 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background: rgba(0, 0, 0, 0.3);
 }
 
+.container-shr {
+  position: sticky; 
+  z-index: 1;
+  height: 0;
+  top: 15vh;
+  left: 0;
+  margin-left: 220px;
+  color: white;
+  font-weight: bold;
+  font-family: verdana;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 0px 0px 5px #232323, -1px 1px 6px #acacac;
+}
+
+.gallery-shr {
+  position: relative;
+  z-index: 3;
+}
+
+.j-shr {
+  height: 50vh;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+#Jumbotron-shr {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: white;
+  filter: blur(3px);
+  z-index: 0;
+  background-repeat: no-repeat;
+  height: 50vh;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
 .text-container h1{font:700 2.5rem/3.125rem "Open Sans",sans-serif;letter-spacing:-.2px}.logo{font:300 150px Comfortaa;color:#fff;cursor:default}.hint{text-align:center;color:rgba(255,255,255,.6);font:300 30px Comfortaa}.image-wrapper{margin-bottom:0!important}.text-wrapper{margin-bottom:0!important}::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:rgba(0,0,0,.1)}::-webkit-scrollbar-thumb{background:#5f4dee}.cardc{box-shadow:0 16px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22);display:grid;font-family:'Trebuchet MS',sans-serif;margin:100px auto;width:350px;padding:20px}.cardc-text{color:#e0e0e0;margin:0}.cardc-text p{color:#92abcf;margin:0}@keyframes animate{0%{transform:translateY(0) rotate(0);opacity:1;border-radius:0}100%{transform:translateY(-1000px) rotate(720deg);opacity:0;border-radius:50%}}
