@@ -179,8 +179,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
   z-index: 3;
 }
 
+.burgerbutton{
+  transform: translateY(-50%);
+}
+
 .j-shr {
-  height: 50vh;
+  height: 75vh;
   position: sticky;
   top: 0;
   left: 0;
@@ -279,7 +283,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   filter: blur(3px);
   z-index: 0;
   background-repeat: no-repeat;
-  height: 50vh;
+  height: 75vh;
   width: 100%;
   background-position: center;
   background-size: cover;

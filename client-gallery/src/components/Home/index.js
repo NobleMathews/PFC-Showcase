@@ -7,7 +7,7 @@ import {getAlbumPreview} from '../helpers/album_metadata';
 import Container from 'react-bootstrap/Container'
 import Skeleton from 'react-loading-skeleton';
 import { useTransition, animated, config } from 'react-spring'
-import logo from '../../assets/images/iitt.png'
+import logo from '../../assets/images/iitt_w.png'
 import logo_i from '../../assets/images/logo.png'
 
 const useShowcase = 10;
@@ -139,11 +139,14 @@ const Home = () => {
               />
             ))
         }
+
+        {/* <a className="sidebar__logo" type="button" href="https://www.iittp.ac.in/" rel="noreferrer" target="_blank">
+            <img src={logo} style={{height:"100%"}}/>
+        </a> */}
+        <div className="fader"/>
         <nav className="navbar navbar-expand navbar-dark bg_under">
           <div className="d-flex flex-grow-1">
-            <a className="navbar-brand" href="/">
-              <img src={logo_i} style={{width:"50px"}} alt="logo" />
-            </a>
+
           </div>
           <div className="flex-grow-1 text-right">
             <ul className="navbar-nav flex-nowrap" style={{justifyContent:"flex-end"}}>
@@ -153,14 +156,15 @@ const Home = () => {
               <li className="nav-item">
                 <a href="#" className="nav-link m-2 menu-item">Blog</a>
               </li>
+              <li className="nav-item">
+              <a className="navbar-brand" style={{"marginLeft":"1rem"}} href="/">
+              <img src={logo_i} style={{width:"50px"}} alt="logo" />
+            </a>
+              </li>
             </ul>
           </div>
         </nav>
 
-        <a className="sidebar__logo" type="button" href="https://www.iittp.ac.in/" rel="noreferrer" target="_blank">
-            <img src={logo} style={{height:"100%"}}/>
-        </a>
-        <div className="fader"/>
          <ContainerCustom>
          <Container fluid={true} >     
            <FadeIn delay={100} className="justify-content-center row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1">            
@@ -178,7 +182,7 @@ const Home = () => {
                 </div>
             ))}
           </FadeIn>
-          
+        
         </Container>
         </ContainerCustom>
         <div className="containerAn">
@@ -236,11 +240,14 @@ const OuterWrapper = styled.div`
   
 }
 .bg_under {
-  position: absolute;
-  top: 100vh;
+  position: sticky;
+  top: 0;
   left: 0;
-  transform: translateY(-100%);
+  // transform: translateY(-100%);
   width:100%;
+  margin-bottom: 72px;
+  margin-top: -72px;
+  z-index:999;
 }
 .fader{
   display: flex;
@@ -248,7 +255,7 @@ const OuterWrapper = styled.div`
   justify-content: center;
   background-size: cover;
   height: 100vh;
-  margin-bottom: 5vh;
+  // margin-bottom: 5vh;
 }
 
 `

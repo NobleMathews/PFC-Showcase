@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.85043690.chunk.css",
-    "main.js": "/static/js/main.0b0baf52.chunk.js",
-    "main.js.map": "/static/js/main.0b0baf52.chunk.js.map",
+    "main.css": "/static/css/main.1dbb934b.chunk.css",
+    "main.js": "/static/js/main.3ccf4c57.chunk.js",
+    "main.js.map": "/static/js/main.3ccf4c57.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.00394f0b.js",
     "runtime-main.js.map": "/static/js/runtime-main.00394f0b.js.map",
     "static/css/2.3c328e4c.chunk.css": "/static/css/2.3c328e4c.chunk.css",
@@ -10,16 +10,16 @@
     "static/js/2.ace07bc1.chunk.js.map": "/static/js/2.ace07bc1.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.3c328e4c.chunk.css.map": "/static/css/2.3c328e4c.chunk.css.map",
-    "static/css/main.85043690.chunk.css.map": "/static/css/main.85043690.chunk.css.map",
+    "static/css/main.1dbb934b.chunk.css.map": "/static/css/main.1dbb934b.chunk.css.map",
     "static/js/2.ace07bc1.chunk.js.LICENSE.txt": "/static/js/2.ace07bc1.chunk.js.LICENSE.txt",
-    "static/media/iitt.704c4ff3.png": "/static/media/iitt.704c4ff3.png",
+    "static/media/iitt_w.1c5f02e6.png": "/static/media/iitt_w.1c5f02e6.png",
     "static/media/logo.52a6fee1.png": "/static/media/logo.52a6fee1.png"
   },
   "entrypoints": [
     "static/js/runtime-main.00394f0b.js",
     "static/css/2.3c328e4c.chunk.css",
     "static/js/2.ace07bc1.chunk.js",
-    "static/css/main.85043690.chunk.css",
-    "static/js/main.0b0baf52.chunk.js"
+    "static/css/main.1dbb934b.chunk.css",
+    "static/js/main.3ccf4c57.chunk.js"
   ]
 }

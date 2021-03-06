@@ -8,6 +8,7 @@ import { stack as Menu } from 'react-burger-menu'
 import ScrollToTop from "react-scroll-to-top";
 import {FaArrowUp} from 'react-icons/fa';
 import Footer from './components/Footer';
+import {config} from "./config";
 
 // import {config} from './config';
 // import {getAlbumsArrObj} from './components/helpers/await_all';
@@ -44,10 +45,20 @@ render() {
    <div id="outer-container" className="App" style={{"background":'var(--color-primary)', height: "100%"}}>
     {/* <Route path="/test" render={() => <Test images={this.state.images} />} /> */}
     <GlobalStyles />
-    <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
+    <Menu  burgerButtonClassName={ "burgerbutton" } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
         <a href="/" className="menu-item" tabIndex="0">
         <i className="lni lni-home"></i><span> Home</span>
         </a>
+        <br></br>
+        <span> Albums </span>
+        <span> --------- </span>
+        {
+          Object.entries(config.albumIDs).map((key) => 
+          <a href={`/gallery/${key[1]}`} key={key} className="menu-item" tabIndex="0">
+          <i className="lni lni-image"></i><span> {key[0]}</span>
+          </a>
+        )}
+          
     </Menu>
     <div id="page-wrap" style={{height: "100%"}}>
     <FadeIn>
