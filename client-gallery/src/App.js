@@ -5,6 +5,9 @@ import Gallery from "./components/Gallery";
 import FadeIn from 'react-fade-in';
 import { createGlobalStyle } from 'styled-components';
 import { stack as Menu } from 'react-burger-menu'
+import ScrollToTop from "react-scroll-to-top";
+import {FaArrowUp} from 'react-icons/fa';
+import Footer from './components/Footer';
 
 // import {config} from './config';
 // import {getAlbumsArrObj} from './components/helpers/await_all';
@@ -43,7 +46,7 @@ render() {
     <GlobalStyles />
     <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
         <a href="/" className="menu-item" tabIndex="0">
-        <i className="lni lni-home"></i><span>Home</span>
+        <i className="lni lni-home"></i><span> Home</span>
         </a>
     </Menu>
     <div id="page-wrap" style={{height: "100%"}}>
@@ -52,6 +55,21 @@ render() {
       <Route exact path="/" component={Home} />
     </FadeIn>
     </div>
+    <ScrollToTop smooth style={{color:"white", backgroundColor:"black", boxShadow:"none"}} component={
+      <FadeIn>
+      <FaArrowUp/>
+      </FadeIn>
+    }/>
+    {/* <ScrollUp 
+              style={{right:"5vw"}}
+              showUnder={40}
+              easing={'easeOutCubic'}
+              duration={800}
+              >
+    <button type="button" className="btn btn-dark btn-circle btn-xl"><FaArrowUp/>
+    </button>
+    </ScrollUp> */}
+    <Footer/>
    </div>
   );
  }
@@ -61,7 +79,7 @@ export default App;
 
 const GlobalStyles = createGlobalStyle`
   html {
-    --color-primary: 	#181818;
+    --color-primary: 	#121212;
     /* --color-accent: #F75743; */
     --color-accent: #383838;
   }

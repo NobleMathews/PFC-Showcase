@@ -1,82 +1,89 @@
 import React, {useEffect, useState, useRef} from 'react'
-import {config} from '../../config';
+import {config as configProj} from '../../config';
 import {getAlbumsArrObj} from '../helpers/await_all';
 import styled from 'styled-components';
 import FadeIn from 'react-fade-in';
 import {getAlbumPreview} from '../helpers/album_metadata';
 import Container from 'react-bootstrap/Container'
 import Skeleton from 'react-loading-skeleton';
-import camera from '../../assets/camera.png'
+import { useTransition, animated, config } from 'react-spring'
+import logo from '../../assets/images/iitt.png'
+import logo_i from '../../assets/images/logo.png'
+
+const slides = [
+  { id: 0, url: 'https://picsum.photos/seed/random1/900/600'},
+  { id: 1, url: 'https://picsum.photos/seed/random2/900/600'},
+  { id: 2, url: 'https://picsum.photos/seed/1random1/900/600'},
+  { id: 3, url: 'https://picsum.photos/seed/2random2/900/600'},
+];
 
 const Home = () => {
+    const [index, set] = useState(0)
+    const transitions = useTransition(slides[index], item => item.id, {
+      from: { opacity: 0 },
+      enter: { opacity: 1 },
+      leave: { opacity: 0 },
+      config: config.molasses,
+    })
+    useEffect(() => {
+      void setInterval(() => set(state => (state + 1) % 4), 3000);
+      (async function(){
+        const values = configProj.albumIDs;
+        getAlbumsArrObj(values);
+      })();
+    }, [])
     const [loading, setLoading] = useState(true);
     const counter = useRef(0);
     const imageLoaded = () => {
       counter.current += 1;
-      if (counter.current >= Object.keys(config.albumIDs).length) {
+      if (counter.current >= Object.keys(configProj.albumIDs).length) {
         setLoading(false);
       }
     }
     // Querying everything parallely to cache on homepage
-    useEffect(() => {
-        (async function(){
-            const values = config.albumIDs;
-            getAlbumsArrObj(values);
-        })();
-    }, [])
-    // https://www.npmjs.com/package/react-burger-menu
     return(
-        <div>
-        
-        <header id="header" className="header" style={{backgroundColor:"	#181818", padding:"15px 15px 0px 15px"}}>
-        <p className="hint" style={{fontSize: "3.5vw", fontFamily: "Roboto, sans-serif", textAlign: 'left', color: "#F5F5F5"}}>PHOTOGRAPHY & FILMS CLUB, IIT TIRUPATI</p>
-        <Jumbotron id="home" className="jumbotron" style={{position:'relative'}}>
-        {/* <div id="infoi"> */}
-        <img className="img-fluid" style={{width:"100%", maxHeight:"calc(100vh - 30px)"}} src={camera} alt="alternative" />
-        {/* </div> */}
-        <div className="info2">
-        <div className="circle red"></div>
-        </div>
-        <div className="infoi">
-        <div className="header-content" style={{height:"100%", display: "flex", alignItems: "center"}}>
-            <div className="container">
-              {/* <div className="row">
-                <div className="col-lg-6 col-xl-5"> */}
-                {/* <div style={{width:"100%", display: "flex", alignItems: "center"}}>
-                  <div className="text-container" style={{width:"100%", padding:"10px 20px"}}>
-                  <p className="hint" style={{fontSize: "4vw"}}>Welcome to</p>
-                  <p className="logo" style={{textAlign:"center", color: "black",fontSize: "20vw"}}>PFC</p>
-                  <p className="hint" style={{fontSize: "4vw" }}>Photography & Films Club, IIT Tirupati</p>
-                  </div> 
-                </div> */}
-                {/* </div>  */}
-                {/* <div className="col-lg-6 col-xl-7">
-                  <div className="image-container">
-                    <div className="img-wrapper">
-                      <img className="img-fluid" src={camera} alt="alternative" />
-                    </div> 
-                  </div> 
-                </div>  */}
-              {/* </div>  */}
-            </div> 
-          </div> 
-                  </div>
-          </Jumbotron> 
+        <OuterWrapper>
+        {
+            transitions.map(({ item, props, key }) => (
+              <animated.div
+                key={key}
+                className="bg"
+                style={{ ...props, backgroundImage: `url(${item.url})` }}
+              />
+            ))
+        }
+        <nav className="navbar navbar-expand navbar-dark bg_under">
+          <div className="d-flex flex-grow-1">
+            <a className="navbar-brand" href="/">
+              <img src={logo_i} style={{width:"50px"}} alt="logo" />
+            </a>
+          </div>
+          <div className="flex-grow-1 text-right">
+            <ul className="navbar-nav flex-nowrap" style={{justifyContent:"flex-end"}}>
+              <li className="nav-item">
+                <a href="#" className="nav-link m-2 menu-item nav-active">Our Team</a>
+              </li>
+              <li className="nav-item">
+                <a href="#" className="nav-link m-2 menu-item">Blog</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
 
-        </header> 
-        <div style={{margin:"40px"}}>  </div>
-        {/* <svg className="header-frame" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 310"><defs><style dangerouslySetInnerHTML={{__html: ".cls-1{fill:#5f4def;}" }} /></defs><title>header-frame</title><path className="cls-1" d="M0,283.054c22.75,12.98,53.1,15.2,70.635,14.808,92.115-2.077,238.3-79.9,354.895-79.938,59.97-.019,106.17,18.059,141.58,34,47.778,21.511,47.778,21.511,90,38.938,28.418,11.731,85.344,26.169,152.992,17.971,68.127-8.255,115.933-34.963,166.492-67.393,37.467-24.032,148.6-112.008,171.753-127.963,27.951-19.26,87.771-81.155,180.71-89.341,72.016-6.343,105.479,12.388,157.434,35.467,69.73,30.976,168.93,92.28,256.514,89.405,100.992-3.315,140.276-41.7,177-64.9V0.24H0V283.054Z" /></svg> */}
-
+        <a className="sidebar__logo" type="button" href="https://www.iittp.ac.in/" rel="noreferrer" target="_blank">
+            <img src={logo} style={{height:"100%"}}/>
+        </a>
+        <div className="fader"/>
          <ContainerCustom>
          <Container fluid={true} >     
            <FadeIn delay={100} className="justify-content-center row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1">            
-             {Object.keys(config.albumIDs).map((name, index)=> (
+             {Object.keys(configProj.albumIDs).map((name, index)=> (
                 <div className="card-deck" key={index}> 
                     <div className="card">
-                    <a className="entireCard" style={{display:"block"}} href={`/gallery/${config.albumIDs[name]}`}> 
+                    <a className="entireCard" style={{display:"block"}} href={`/gallery/${configProj.albumIDs[name]}`}> 
                     <div className="card-body">
                     <Skeleton style={{display: loading ? "block" : "none"}} className={"setHeight"}/>
-                    <img style={{display: loading ? "none" : "block"}} className="card-img-top" src={getAlbumPreview(name)} alt={"Placeholder preview"} onLoad={imageLoaded}/>
+                    <img style={{display: loading ? "none" : "block"}} className="card-img-top cover" src={getAlbumPreview(name)} alt={"Placeholder preview"} onLoad={imageLoaded}/>
                     <h5 className="title">{name}</h5>
                     </div>
                     </a>
@@ -87,62 +94,13 @@ const Home = () => {
           
         </Container>
         </ContainerCustom>
-
-        <footer id="footer" className="footer-area pt-120">
-          <div className="container">
-            <div className="footer-widget pb-100">
-              <div className="row">
-                <div className="col-lg-4 col-md-6 col-sm-8">
-                  <div className="footer-about mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
-                    <a className="logo" href="/logo">
-                      <img src={process.env.PUBLIC_URL +"/assets/images/logo.png"} alt="logo" />
-                    </a>
-                    {/* <div className="text">
-                    <p className="cardc-text">Inventions and Innovations become heirs </p>
-                    </div> */}
-                    <ul className="social">
-                      <li><a href="# "><i className="lni lni-facebook-filled" /></a></li>
-                      <li><a href="# "><i className="lni lni-twitter-filled" /></a></li>
-                      <li><a href="# "><i className="lni lni-instagram-filled" /></a></li>
-                      <li><a href="# "><i className="lni lni-linkedin-original" /></a></li>
-                    </ul>
-                  </div> 
-                </div>
-                <div className="col-lg-4 col-md-7 col-sm-7">
- 
-                </div>
-                <div className="col-lg-3 col-md-5 col-sm-5">
-                  <div className="footer-contact mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
-                  <div className="cardc" style={{background:"#5f4def"}}>
-                      <h3 style={{color:"white"}}>Contact</h3>
-                      <p className="cardc-text">+91-</p>
-                      <p className="cardc-text">pfc@iitp.ac.in</p>
-                      <p className="cardc-text">Nischal K</p>
-                      <div className="cardc-text">
-                        <p>Indian Institute of Technology Tirupati,</p>
-                        <p>Venkatagiri Road , Yerpedu Mandal,</p>
-                        <p>Chittoor - 517 619,</p>
-                        <p>Andhra Pradesh, India.</p>
-                      </div>
-                </div>
-                  </div>
-                </div>
-              </div> 
-            </div> 
-            <div className="footer-copyright">
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="copyright mx-auto" style={{textAlign: "center"}}>
-                    <div className="copyright-content">
-                      <p className="text">Built by <a href="# " rel="nofollow">Fantastic Four</a></p>
-                    </div> 
-                  </div> 
-                </div>
-              </div> 
-            </div> 
-          </div> 
-        </footer>
-      </div>
+        <div className="containerAn">
+          <div className="chevron" />
+          <div className="chevron" />
+          <div className="chevron" />
+          <span className="text">Scroll down</span>
+        </div>
+      </OuterWrapper>
     )
     // return (
     //     <>       
@@ -178,6 +136,36 @@ const Home = () => {
 }
 /*Polaroid Version*/
 
+const OuterWrapper = styled.div`
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  will-change: opacity;
+  
+}
+.bg_under {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  transform: translateY(-100%);
+  width:100%;
+}
+.fader{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 100vh;
+  margin-bottom: 5vh;
+}
+
+`
+
 const ContainerCustom = styled.div`
    
     // margin: 15px 15px 60px 30px;
@@ -206,16 +194,14 @@ const ContainerCustom = styled.div`
     .card{
         margin: auto 16px auto 16px;
         padding:0px 0px 0px 0px;
-        background-color: 	#F5F5F5;
+        background-color: 	#1E1E1E;
         border-radius:0px;
-        color: black;
+        color: #E2E2E2;
     }
     .card:hover{
         transition: all 0.5s ease;
-        background-color: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
-        color: black;
+        background-color: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1));
         transform: scale(1.02);
-        background-color: white;
     }
     .card-img-top{
         // padding:20px 0px 15px 0px;
@@ -225,7 +211,7 @@ const ContainerCustom = styled.div`
     .entireCard{
         padding:10px 8px 20px 8px;
         background-color: transparent;
-        color: black;
+        color: #E2E2E2;
         text-align: center;
         margin:0px 0px 0px 0px;
         transition: all 0.5s ease;
@@ -239,13 +225,14 @@ const ContainerCustom = styled.div`
         0 22.3px 17.9px rgba(0, 0, 0, 0.072),
         0 41.8px 33.4px rgba(0, 0, 0, 0.086),
         0 100px 80px rgba(0, 0, 0, 0.12);
+        opacity: 0.8;
         transition: all 0.5s ease;
-        background-color: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));;
-        color: black;
+        background-color: black;
         text-align: center;
         margin:0px 0px 0px 0px;
         text-decoration: none;
         transform: scale(1.01);
+        color: #A2845C;
     }
     .title{
         font-family: 'Permanent Marker', cursive;
@@ -304,20 +291,21 @@ const ContainerCustom = styled.div`
     }
 ` */
 
-const Jumbotron = styled.div`
-    // margin:15px 15px 30px 15px;
-    padding:0px !important;
-    margin: 0px !important;
-    // border-radius:10px;
-    background: 
-    linear-gradient(
-    rgba(0, 0, 250, 0.25), 
-    rgba(125, 250, 250, 0.45)
-    ),
-    url(https://source.unsplash.com/1600x1050/?nature);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color:white !important;
-    max-height:calc(100vh - 30px);
-`
+// const Jumbotron = styled.div`
+//     // margin:15px 15px 30px 15px;
+//     padding:0px !important;
+//     margin: 0px !important;
+//     // border-radius:10px;
+//     background: 
+//     linear-gradient(
+//     rgba(0, 0, 250, 0.25), 
+//     rgba(125, 250, 250, 0.45)
+//     ),
+//     url(https://source.unsplash.com/1600x1050/?nature);
+//     background-repeat: no-repeat;
+//     background-attachment: fixed;
+//     color:white !important;
+//     max-height:calc(100vh - 30px);
+// `
+
 export default Home;
