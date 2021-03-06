@@ -351,7 +351,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .site-footer .container .logo-img {
-	width: 180px;
+	/* width: 180px; */
 	height: 140px;
 	cursor: pointer;
 }

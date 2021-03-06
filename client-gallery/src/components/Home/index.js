@@ -113,7 +113,7 @@ const Home = () => {
       config: config.molasses,
     })
     useEffect(() => {
-      void setInterval(() => set(state => (state + 1) % useShowcase), 4000);
+      void setInterval(() => set(state => (state + 1) % useShowcase), 6500);
       (async function(){
         const values = configProj.albumIDs;
         getAlbumsArrObj(values);
