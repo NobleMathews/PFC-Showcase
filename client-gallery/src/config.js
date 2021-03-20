@@ -18,6 +18,6 @@ config.albumPreviews={
 // showcase album _> picsum
 // about us page  
 
-config.maxWidth = "=w3840"
+config.maxWidth = "=w5120"
 
 config.previewWidth = "=w600"
