@@ -233,11 +233,17 @@ const OuterWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
   background-size: cover;
   background-position: center;
   will-change: opacity;
+  height:100%;
   
+}
+@media only screen and (min-width: 600px) {
+  .bg {
+    height: 100vh;
+    background-color: lightblue;
+  }
 }
 .bg_under {
   position: sticky;
