@@ -242,7 +242,7 @@ const OuterWrapper = styled.div`
 @media only screen and (min-width: 600px) {
   .bg {
     height: 100vh;
-    background-color: lightblue;
+    background-color: grey;
   }
 }
 .bg_under {
