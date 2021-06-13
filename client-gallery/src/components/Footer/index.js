@@ -30,7 +30,6 @@ const Footer = () => {
             </div>   
           </div>
           <hr />
-          <img src="https://hitcounter.pythonanywhere.com/count/tag.svg?url=http%3A%2F%2Fpfciitt.in" alt="Hits"></img>
           <p style={{color:"grey"}}>Copyright © 2021 | Built by the <b><a href="# " style={{color:"#A2845C", textDecoration:"none"}} rel="nofollow">Fantastic Four</a></b></p>
         </div>
       </footer>
